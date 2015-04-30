@@ -42,14 +42,16 @@ class ViewController: UIViewController {
                     git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String)
                 }else{
 //                    self.navigationController?.pushViewController(RepositoriosTableViewController(), animated: true)
-                    var nextView:UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
-                    self.presentViewController(nextView, animated: true, completion: { () -> Void in})
+                    
                 }
             }else {
                 NSUserDefaults().setObject(userTextField.text, forKey: "usuario")
                 git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String)
+                
             }
         }
+        var nextView:UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
+        self.presentViewController(nextView, animated: true, completion: { () -> Void in})
     }
     
     
