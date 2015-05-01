@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     
     var git: GitManager = GitManager()
     let animation = CABasicAnimation(keyPath: "position")
-    
+    var nextView:UIViewController!
     
     @IBOutlet weak var lblWelcome: UILabel!
     @IBOutlet weak var userTextField: UITextField!
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
             var valida = git.buscarRepositorio(userTextField.text)
             
             if valida == -1{
-                
+            
                 let alerta: UIAlertController = UIAlertController(title: "Usuário não encontrado", message: "Digite seu usuário novamente", preferredStyle: .ActionSheet)
                 
                 let acao: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: { action -> Void in
@@ -53,10 +53,43 @@ class ViewController: UIViewController {
                 self.presentViewController(alerta, animated: true, completion: nil)
             }
             else{
+                nextView = self.storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
+//------------------ INICIO DA VIEW DE ESPERA
+//                var alertView: UIAlertView = UIAlertView(title: "Carregando...", message: nil, delegate: nil, cancelButtonTitle: nil)
+//                var activityIndicator: UIActivityIndicatorView! = UIActivityIndicatorView(frame: CGRectMake(50, 0, 35, 35)) as UIActivityIndicatorView
+//                activityIndicator.center = self.view.center
+//                activityIndicator.hidesWhenStopped = true
+//                activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+//                activityIndicator.startAnimating()
+//                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+//                
+//                alertView.setValue(activityIndicator, forKey: "accessoryView")
+//                activityIndicator.startAnimating()
+//                
+//                alertView.show()
+//                
+//                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+//                dispatch_async(dispatch_get_global_queue(priority, 0), { ()->() in
+//                    dispatch_async(dispatch_get_main_queue(), {
+//                        RepositorioManager.sharedInstance.removerTodos()
+//                        RepositorioManager.sharedInstance.buscarRepositorio()
+//                        dispatch_async(dispatch_get_main_queue(), {
+//             //               self.nextView.tableView.reloadData() ---- dar uma jeito para pegar a tableView
+//                            alertView.title = "Finalizado"
+//                            activityIndicator.stopAnimating()
+//                            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+//                        })
+//                        sleep(1)
+//                        dispatch_async(dispatch_get_main_queue(), {
+//                            alertView.dismissWithClickedButtonIndex(-1, animated: true)
+//                        })
+//
+//                    })
+//                    
+//                })
+//------------------- FIM CODIGO DA VIEW DE ESPERA
                 
                 NSUserDefaults().setObject(userTextField.text, forKey: "usuario")
-                
-                var nextView:UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
                 self.presentViewController(nextView, animated: true, completion: { () -> Void in})
                 
             }
