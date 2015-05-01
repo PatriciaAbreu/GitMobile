@@ -24,9 +24,8 @@ class GitManager: NSObject {
     }
     
     func buscarRepositorio(usuario: NSString) -> Int {
-//        println(NSUserDefaults().objectForKey("usuario") as! String)
         
-        self.buscarRepos("PatriciaAbreu")
+        self.buscarRepos(usuario as String)
         var complemento = NSUserDefaults().objectForKey("complemento") as! String
         
         var url: String

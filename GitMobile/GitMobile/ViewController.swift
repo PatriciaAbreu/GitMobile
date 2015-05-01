@@ -51,6 +51,7 @@ class ViewController: UIViewController {
                 self.presentViewController(alerta, animated: true, completion: nil)
             }
             else{
+                
                 NSUserDefaults().setObject(userTextField.text, forKey: "usuario")
                 
                 var nextView:UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
