@@ -11,7 +11,7 @@ import UIKit
 class LabelsTableViewController: UITableViewController, UITableViewDataSource {
     
     let notificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
-    var row:AnyObject!
+    var row:Int!
     
     lazy var repositorios:Array<Repositorio> = {
         return RepositorioManager.sharedInstance.buscarRepositorio()
@@ -27,7 +27,7 @@ class LabelsTableViewController: UITableViewController, UITableViewDataSource {
         
         let msg: AnyObject? = info ["mensagem"]
         
-        row = msg
+        row = msg as! Int
         
     }
 
@@ -52,6 +52,12 @@ class LabelsTableViewController: UITableViewController, UITableViewDataSource {
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var repositorio:Repositorio = repositorios[self.row]
+        var labels = repositorio.labels.componentsSeparatedByString(",")
+
+        
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
 
 
