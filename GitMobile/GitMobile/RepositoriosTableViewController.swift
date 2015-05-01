@@ -11,6 +11,8 @@ import UIKit
 class RepositoriosTableViewController: UITableViewController, UITableViewDataSource {
     
     var git:GitManager = GitManager()
+    let notificacao:NSNotificationCenter = NSNotificationCenter.defaultCenter()
+    var outraView:UIViewController!
     
     lazy var repositorios:Array<Repositorio> = {
         return RepositorioManager.sharedInstance.buscarRepositorio()
@@ -28,12 +30,11 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
 
-    //    git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String)
-        
+        outraView = self.storyboard!.instantiateViewControllerWithIdentifier("labelsViewController") as!UIViewController
+        notificacao.addObserver(outraView, selector: "inserirRepositorio:", name: "novoRepositorio", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
-       // repositorios = RepositorioManager.sharedInstance.buscarRepositorio()
         self.tableView.reloadData()
     }
 
@@ -66,6 +67,19 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
         
         return cell
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var row = tableView.indexPathForSelectedRow()?.row
+        
+        var mensagem:NSDictionary = NSDictionary(object: row!, forKey: "mensagem")
+        
+        notificacao.postNotificationName("novoRepositorio", object: self, userInfo: mensagem as [NSObject: AnyObject])
+        
+        
+        self.navigationController?.pushViewController(outraView, animated: true)
+        
+    }
+
 
 
     /*

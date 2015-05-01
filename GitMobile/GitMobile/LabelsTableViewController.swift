@@ -9,15 +9,26 @@
 import UIKit
 
 class LabelsTableViewController: UITableViewController, UITableViewDataSource {
-
+    
+    let notificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
+    var row:AnyObject!
+    
+    lazy var repositorios:Array<Repositorio> = {
+        return RepositorioManager.sharedInstance.buscarRepositorio()
+        }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+    }
+    
+    func inserirRepositorio(mensagem: NSNotification){
+        let info = mensagem.userInfo as! Dictionary<String, AnyObject>
+        
+        let msg: AnyObject? = info ["mensagem"]
+        
+        row = msg
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,15 +50,14 @@ class LabelsTableViewController: UITableViewController, UITableViewDataSource {
         return 0
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
 
-        // Configure the cell...
 
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.
