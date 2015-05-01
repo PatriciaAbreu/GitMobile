@@ -14,11 +14,13 @@ class ViewController: UIViewController {
     let animation = CABasicAnimation(keyPath: "position")
     
     
+    @IBOutlet weak var lblWelcome: UILabel!
     @IBOutlet weak var userTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-            userTextField.placeholder = "Digite o nome de Usuário do Git..."
+    
+            userTextField.placeholder = "                    Insert your GitUser here..."
+            lblWelcome.text = "Welcome to GitMobile!"
     }
     
     override func viewWillAppear(animated: Bool) {
