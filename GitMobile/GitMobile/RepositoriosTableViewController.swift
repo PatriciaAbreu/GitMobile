@@ -18,7 +18,7 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
 
     @IBAction func btnLogout(sender: AnyObject) {
         
-        NSUserDefaults().objectForKey("usuario") == nil
+        NSUserDefaults().setObject(nil, forKey: "usuario")
         RepositorioManager.sharedInstance.removerTodos()
         
         var viewLogin:UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("loginViewController") as! UIViewController
@@ -28,12 +28,12 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String)
+    //    git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String)
         
     }
     
     override func viewWillAppear(animated: Bool) {
-        repositorios = RepositorioManager.sharedInstance.buscarRepositorio()
+       // repositorios = RepositorioManager.sharedInstance.buscarRepositorio()
         self.tableView.reloadData()
     }
 

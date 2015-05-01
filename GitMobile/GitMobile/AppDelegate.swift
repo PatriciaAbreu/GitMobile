@@ -16,7 +16,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+        
+        let tableView:UIViewController = storyboard.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
+        let view:UIViewController = storyboard.instantiateViewControllerWithIdentifier("loginViewController") as! UIViewController
+        
+        let frame = UIScreen.mainScreen().bounds
+        self.window! = UIWindow(frame: frame)
+
+            
+        if NSUserDefaults().objectForKey("usuario") != nil{
+            self.window!.rootViewController = tableView
+            
+        }
+        else{
+            self.window!.rootViewController = view
+        }
+        
+        self.window!.makeKeyAndVisible()
+
         return true
     }
 

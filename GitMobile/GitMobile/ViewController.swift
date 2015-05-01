@@ -17,8 +17,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var userTextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        userTextField.placeholder = "Digite o nome de Usuário do Git..."
+        
+            userTextField.placeholder = "Digite o nome de Usuário do Git..."
     }
+    
+    override func viewWillAppear(animated: Bool) {
+            }
     
     @IBAction func entradaUsuario(sender: AnyObject) {
         
@@ -31,28 +35,12 @@ class ViewController: UIViewController {
             userTextField.layer.addAnimation(animation, forKey: "position")
         }
         else{
-        if NSUserDefaults().objectForKey("usuario") == nil{
             NSUserDefaults().setObject(userTextField.text, forKey: "usuario")
-        }else{
-            if ((NSUserDefaults().objectForKey("usuario")?.isEqual(userTextField.text)) != nil){
-                
-                NSUserDefaults().setObject(userTextField.text, forKey: "usuario")
-                
-                if RepositorioManager.sharedInstance.buscarRepositorio().count == 0{
-                    git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String)
-                }else{
-//                    self.navigationController?.pushViewController(RepositoriosTableViewController(), animated: true)
-                    
-                }
-            }else {
-                NSUserDefaults().setObject(userTextField.text, forKey: "usuario")
-                git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String)
-                
-            }
+            git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String)
+            
+            var nextView:UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
+            self.presentViewController(nextView, animated: true, completion: { () -> Void in})
         }
-        var nextView:UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
-        self.presentViewController(nextView, animated: true, completion: { () -> Void in})
-    }
     }
     
     override func didReceiveMemoryWarning() {
