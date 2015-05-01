@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     let animation = CABasicAnimation(keyPath: "position")
     var nextView:UIViewController!
     
+    @IBOutlet weak var lblWelcome: UILabel!
     @IBOutlet weak var userTextField: UITextField!
     
     @IBOutlet weak var btnLogin: UIButton!
