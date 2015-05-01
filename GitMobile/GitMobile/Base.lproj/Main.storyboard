@@ -33,6 +33,21 @@
                                     <action selector="entradaUsuario:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ezv-TU-A7s"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A88-Jm-eGd">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="179" y="334" width="42" height="21"/>
+                                </variation>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="I08-kf-Ku1">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="190" y="260" width="20" height="20"/>
+                                </variation>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -46,14 +61,27 @@
                             <constraint firstAttribute="centerX" secondItem="LnU-oF-SeI" secondAttribute="centerX" id="u13-5M-WZy"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="A88-Jm-eGd"/>
+                                <exclude reference="I08-kf-Ku1"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="0x4-yR-nb1"/>
                                 <exclude reference="Ety-aO-vgd"/>
                             </mask>
                         </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="A88-Jm-eGd"/>
+                                <include reference="I08-kf-Ku1"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="55h-nj-QBQ"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="I08-kf-Ku1" id="XLg-w1-KaP"/>
+                        <outlet property="btnLogin" destination="LnU-oF-SeI" id="w94-Cj-Cyt"/>
+                        <outlet property="labelMessage" destination="A88-Jm-eGd" id="yYS-0A-eKr"/>
                         <outlet property="userTextField" destination="jcW-kF-Tup" id="oxT-x5-Y9g"/>
                     </connections>
                 </viewController>
