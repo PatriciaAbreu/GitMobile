@@ -16,6 +16,15 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
         return RepositorioManager.sharedInstance.buscarRepositorio()
     }()
 
+    @IBAction func btnLogout(sender: AnyObject) {
+        
+        NSUserDefaults().objectForKey("usuario") == nil
+        RepositorioManager.sharedInstance.removerTodos()
+        
+        var viewLogin:UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("loginViewController") as! UIViewController
+        self.presentViewController(viewLogin, animated: true, completion: { () -> Void in})
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

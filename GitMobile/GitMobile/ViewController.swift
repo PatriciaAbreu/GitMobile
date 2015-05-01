@@ -30,7 +30,7 @@ class ViewController: UIViewController {
             animation.toValue = NSValue(CGPoint: CGPointMake(userTextField.center.x + 10, userTextField.center.y))
             userTextField.layer.addAnimation(animation, forKey: "position")
         }
-        
+        else{
         if NSUserDefaults().objectForKey("usuario") == nil{
             NSUserDefaults().setObject(userTextField.text, forKey: "usuario")
         }else{
@@ -53,7 +53,7 @@ class ViewController: UIViewController {
         var nextView:UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
         self.presentViewController(nextView, animated: true, completion: { () -> Void in})
     }
-    
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -55,4 +55,12 @@ public class RepositorioManager {
         return Array<Repositorio>()
     }
     
+    func removerTodos() {
+        var arrayRep: Array<Repositorio> = buscarRepositorio()
+        
+        for rep: Repositorio in arrayRep {
+            managedContext.deleteObject(rep)
+        }
+    }
+    
 }
