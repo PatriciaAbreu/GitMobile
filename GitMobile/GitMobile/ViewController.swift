@@ -35,11 +35,28 @@ class ViewController: UIViewController {
             userTextField.layer.addAnimation(animation, forKey: "position")
         }
         else{
-            NSUserDefaults().setObject(userTextField.text, forKey: "usuario")
-            git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String)
             
-            var nextView:UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
-            self.presentViewController(nextView, animated: true, completion: { () -> Void in})
+            var valida = git.buscarRepositorio(userTextField.text)
+            
+            if valida == -1{
+                
+                let alerta: UIAlertController = UIAlertController(title: "Usuário não encontrado", message: "Digite seu usuário novamente", preferredStyle: .ActionSheet)
+                
+                let acao: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: { action -> Void in
+                    
+                })
+                
+                alerta.addAction(acao)
+                
+                self.presentViewController(alerta, animated: true, completion: nil)
+            }
+            else{
+                NSUserDefaults().setObject(userTextField.text, forKey: "usuario")
+                
+                var nextView:UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
+                self.presentViewController(nextView, animated: true, completion: { () -> Void in})
+                
+            }
         }
     }
     
