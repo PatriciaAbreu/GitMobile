@@ -260,6 +260,10 @@ class ViewController: UIViewController {
         
     }
     
+//    Em qualquer lugar que tocar na tela "some" com o teclado
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
