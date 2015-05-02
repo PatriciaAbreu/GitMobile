@@ -98,6 +98,7 @@
                     <navigationItem key="navigationItem" id="55h-nj-QBQ"/>
                     <connections>
                         <outlet property="btnLogin" destination="LnU-oF-SeI" id="2VX-cb-wVl"/>
+                        <outlet property="img" destination="MVU-jh-tpz" id="w85-eI-E00"/>
                         <outlet property="lblWelcome" destination="ZWl-F8-m8C" id="igL-qE-XLP"/>
                         <outlet property="userTextField" destination="ndb-vJ-9L3" id="dKd-mk-Xuy"/>
                     </connections>

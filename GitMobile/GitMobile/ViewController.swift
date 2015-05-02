@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var lblWelcome: UILabel!
     @IBOutlet weak var userTextField: UITextField!
+    @IBOutlet weak var img: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,43 @@ class ViewController: UIViewController {
         userTextField.becomeFirstResponder()
         userTextField.placeholder = "                    Insert your GitUser here..."
         lblWelcome.text = "Welcome to GitMobile!"
+        
+//        UIView.animateWithDuration(1.0, delay: 0.2, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: nil, animations: {
+//            
+//            self.EducationLabel.hidden = true
+//            self.EducationLabel.center = CGPointMake(8, 150)
+//            self.EducationLabel.hidden = false
+//            
+//            }, completion: nil)
+        
+        UIImageView.animateWithDuration(2.0, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: nil, animations: {
+            
+            //self.lblWelcome.hidden = true
+            //self.userTextField.hidden = true
+            //self.btnLogin.hidden = true
+            self.img.center = CGPointMake(0, 0)
+        }, completion: nil)
+        
+        
+        UILabel.animateWithDuration(2.0, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: nil, animations: {
+            
+            //self.userTextField.hidden = true
+            //self.btnLogin.hidden = true
+            self.lblWelcome.center = CGPointMake(0, 50)
+        }, completion: nil)
+        
+        UITextField.animateWithDuration(2.0, delay: 1.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: nil, animations: {
+            
+            //self.btnLogin.hidden = true
+            self.userTextField.center = CGPointMake(0, 50)
+        }, completion: nil)
+        
+        
+        UIButton.animateWithDuration(2.0, delay: 1.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: nil, animations: {
+            
+            self.btnLogin.center = CGPointMake(0, 50)
+        }, completion: nil)
+        
         
 //                activityIndicator.hidden = true
         
