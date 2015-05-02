@@ -29,13 +29,15 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         outraView = self.storyboard!.instantiateViewControllerWithIdentifier("labelsViewController") as!UIViewController
         notificacao.addObserver(outraView, selector: "inserirRepositorio:", name: "novoRepositorio", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
         self.tableView.reloadData()
+        self.navigationController?.title = NSUserDefaults().objectForKey("usuario") as? String
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,8 +64,13 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
         let item:Repositorio = repositorios[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("reposCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.text = item.nomeRepositorio
-        cell.detailTextLabel?.text = "\(item.numero)"
-
+        
+        if item.numero == 0{
+            cell.detailTextLabel?.text = "Sem Pull Request"
+        }
+        else{
+            cell.detailTextLabel?.text = "Pull Request \(item.numero)"
+        }
         
         return cell
     }

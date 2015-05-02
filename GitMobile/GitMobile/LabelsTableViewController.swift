@@ -12,6 +12,7 @@ class LabelsTableViewController: UITableViewController, UITableViewDataSource {
     
     let notificacao: NSNotificationCenter = NSNotificationCenter.defaultCenter()
     var row:Int!
+    var labels: Array<String>!
     
     lazy var repositorios:Array<Repositorio> = {
         return RepositorioManager.sharedInstance.buscarRepositorio()
@@ -19,6 +20,9 @@ class LabelsTableViewController: UITableViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var repositorio:Repositorio = repositorios[self.row]
+        labels = repositorio.labels.componentsSeparatedByString(",")
         
     }
     
@@ -41,25 +45,22 @@ class LabelsTableViewController: UITableViewController, UITableViewDataSource {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return labels.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        var repositorio:Repositorio = repositorios[self.row]
-        var labels = repositorio.labels.componentsSeparatedByString(",")
 
-        
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("labelCell") as! UITableViewCell
 
+        cell.textLabel?.text = labels[indexPath.row]
+        
 
         return cell
     }
