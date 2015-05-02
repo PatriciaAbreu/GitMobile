@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         self.window!.makeKeyAndVisible()
+        sleep(1)
 
         return true
     }

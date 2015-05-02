@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LnU-oF-SeI">
-                                <rect key="frame" x="273" y="380" width="54" height="41"/>
+                                <rect key="frame" x="273" y="459" width="54" height="41"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                 <state key="normal" title="Login">
-                                    <color key="titleColor" red="0.0892350889790854" green="0.19292347070847224" blue="0.32467586436170215" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -29,12 +29,19 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to GitMobile!! 😁 " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWl-F8-m8C">
-                                <rect key="frame" x="114" y="196" width="372" height="39"/>
+                                <rect key="frame" x="114" y="120" width="372" height="39"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="33"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="github-1024-black copy" translatesAutoresizingMaskIntoConstraints="NO" id="MVU-jh-tpz">
+                                <rect key="frame" x="200" y="179" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="8YV-wd-Xwb"/>
+                                    <constraint firstAttribute="height" constant="200" id="ncO-XJ-nfI"/>
+                                </constraints>
+                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ndb-vJ-9L3">
-                                <rect key="frame" x="16" y="335" width="568" height="30"/>
+                                <rect key="frame" x="16" y="419" width="568" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="568" id="fsu-vI-JdW"/>
                                 </constraints>
@@ -49,25 +56,27 @@
                         </subviews>
                         <color key="backgroundColor" red="0.43529411764705883" green="0.52941176470588236" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="ZWl-F8-m8C" secondAttribute="centerX" id="1NK-4H-suV"/>
                             <constraint firstItem="ZWl-F8-m8C" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="112" id="6q4-xf-J6O"/>
-                            <constraint firstAttribute="centerX" secondItem="LnU-oF-SeI" secondAttribute="centerX" id="BsT-RK-FjG"/>
+                            <constraint firstAttribute="centerX" secondItem="LnU-oF-SeI" secondAttribute="centerX" id="CEL-uJ-CCu"/>
+                            <constraint firstItem="MVU-jh-tpz" firstAttribute="top" secondItem="ZWl-F8-m8C" secondAttribute="bottom" constant="20" id="Dcf-MO-Hxd"/>
                             <constraint firstItem="LnU-oF-SeI" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="261" id="Ety-aO-vgd"/>
-                            <constraint firstAttribute="centerX" secondItem="ndb-vJ-9L3" secondAttribute="centerX" id="KNC-Gd-ond"/>
+                            <constraint firstItem="ndb-vJ-9L3" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="GK4-9c-Jsf"/>
+                            <constraint firstItem="ndb-vJ-9L3" firstAttribute="centerX" secondItem="LnU-oF-SeI" secondAttribute="centerX" id="J1t-qd-KnU"/>
                             <constraint firstItem="ndb-vJ-9L3" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" constant="10" id="M2z-pw-Loj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ndb-vJ-9L3" secondAttribute="trailing" constant="-10" id="MbQ-sK-GNI"/>
                             <constraint firstItem="ndb-vJ-9L3" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" constant="10" id="O18-v4-skV"/>
-                            <constraint firstItem="LnU-oF-SeI" firstAttribute="top" secondItem="ndb-vJ-9L3" secondAttribute="bottom" constant="15" id="Pbj-rK-GjK"/>
-                            <constraint firstItem="ndb-vJ-9L3" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="V1l-eA-bZZ"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="LnU-oF-SeI" secondAttribute="bottom" constant="101" id="WCS-1o-2PH"/>
                             <constraint firstItem="ndb-vJ-9L3" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="Xyu-tx-B5r"/>
                             <constraint firstItem="LnU-oF-SeI" firstAttribute="top" secondItem="ndb-vJ-9L3" secondAttribute="bottom" constant="93" id="aLP-0B-bA2"/>
                             <constraint firstItem="ndb-vJ-9L3" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="aj0-Uc-qcP"/>
                             <constraint firstAttribute="centerX" secondItem="ZWl-F8-m8C" secondAttribute="centerX" constant="-28" id="bHk-He-Yaa"/>
                             <constraint firstItem="ndb-vJ-9L3" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="g7K-JR-v5O"/>
-                            <constraint firstItem="ndb-vJ-9L3" firstAttribute="top" secondItem="ZWl-F8-m8C" secondAttribute="bottom" constant="100" id="gfd-dE-fZU"/>
                             <constraint firstAttribute="centerY" secondItem="ZWl-F8-m8C" secondAttribute="centerY" id="i1g-dA-rd8"/>
-                            <constraint firstAttribute="centerX" secondItem="ZWl-F8-m8C" secondAttribute="centerX" id="rKa-Ul-wEE"/>
-                            <constraint firstItem="ZWl-F8-m8C" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="176" id="rgV-jM-sTE"/>
+                            <constraint firstItem="ndb-vJ-9L3" firstAttribute="top" secondItem="MVU-jh-tpz" secondAttribute="bottom" constant="40" id="n6D-5T-ZXr"/>
+                            <constraint firstItem="ZWl-F8-m8C" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="100" id="sVx-WK-hXp"/>
+                            <constraint firstItem="LnU-oF-SeI" firstAttribute="top" secondItem="ndb-vJ-9L3" secondAttribute="bottom" constant="10" id="vsP-V9-s6a"/>
+                            <constraint firstAttribute="centerX" secondItem="MVU-jh-tpz" secondAttribute="centerX" id="x8t-oH-gAZ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -156,6 +165,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="labelsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="PBB-cg-DFz" customClass="LabelsTableViewController" customModule="GitMobile" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jph-ab-bkm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -204,4 +214,7 @@
             <point key="canvasLocation" x="-291" y="352"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="github-1024-black copy" width="1024" height="1024"/>
+    </resources>
 </document>
