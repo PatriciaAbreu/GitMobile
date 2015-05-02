@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        userTextField.becomeFirstResponder()
         userTextField.placeholder = "                    Insert your GitUser here..."
         lblWelcome.text = "Welcome to GitMobile!"
         

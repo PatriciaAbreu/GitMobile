@@ -24,6 +24,8 @@ class LabelsTableViewController: UITableViewController, UITableViewDataSource {
         var repositorio:Repositorio = repositorios[self.row]
         labels = repositorio.labels.componentsSeparatedByString(",")
         
+        self.view.backgroundColor = UIColor(red: 110/255, green: 135/255, blue: 151/255, alpha: 1)
+        
     }
     
     func inserirRepositorio(mensagem: NSNotification){
@@ -60,6 +62,8 @@ class LabelsTableViewController: UITableViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier("labelCell") as! UITableViewCell
 
         cell.textLabel?.text = labels[indexPath.row]
+        
+        cell.backgroundColor = UIColor(red: 110/255, green: 135/255, blue: 151/255, alpha: 1)
         
 
         return cell

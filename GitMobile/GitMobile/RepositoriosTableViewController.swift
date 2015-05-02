@@ -32,6 +32,8 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
         
         outraView = self.storyboard!.instantiateViewControllerWithIdentifier("labelsViewController") as!UIViewController
         notificacao.addObserver(outraView, selector: "inserirRepositorio:", name: "novoRepositorio", object: nil)
+        
+        self.view.backgroundColor = UIColor(red: 110/255, green: 135/255, blue: 151/255, alpha: 1)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -61,9 +63,11 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        
         let item:Repositorio = repositorios[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("reposCell", forIndexPath: indexPath) as! UITableViewCell
         cell.textLabel?.text = item.nomeRepositorio
+        cell.backgroundColor = UIColor(red: 110/255, green: 135/255, blue: 151/255, alpha: 1)
         
         if item.numero == 0{
             cell.detailTextLabel?.text = "Sem Pull Request"

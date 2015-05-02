@@ -106,7 +106,7 @@
             </objects>
             <point key="canvasLocation" x="429" y="352"/>
         </scene>
-        <!--Repositorios Table View Controller-->
+        <!--Repositorios-->
         <scene sceneID="dSe-8k-iSY">
             <objects>
                 <tableViewController id="dRd-18-dtK" customClass="RepositoriosTableViewController" customModule="GitMobile" customModuleProvider="target" sceneMemberID="viewController">
@@ -141,12 +141,13 @@
                             <outlet property="delegate" destination="dRd-18-dtK" id="Pc4-Iz-Mpj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="cmN-qz-nBN">
+                    <navigationItem key="navigationItem" title="Repositorios" id="cmN-qz-nBN">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="YM1-Ym-xVr">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="COr-ZY-gHN">
-                                <rect key="frame" x="-23" y="-15" width="133" height="30"/>
+                                <rect key="frame" x="16" y="7" width="59" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Log Out">
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                <state key="normal" title="Logout">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
