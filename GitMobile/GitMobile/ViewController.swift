@@ -180,69 +180,69 @@ class ViewController: UIViewController {
                 //                println("Fim do ViewDidLoad")
                 //
                 //
-                //                                var alertView: UIAlertView = UIAlertView(title: "Carregando...", message: nil, delegate: nil, cancelButtonTitle: nil)
-                //
-                //                                var activityIndicator: UIActivityIndicatorView! = UIActivityIndicatorView(frame: CGRectMake(50, 0, 35, 35)) as UIActivityIndicatorView
-                //
-                //                                activityIndicator.center = self.view.center
-                //
-                //                                activityIndicator.hidesWhenStopped = true
-                //
-                //                                activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-                //
-                //                                activityIndicator.startAnimating()
-                //
-                //                                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-                //
-                //
-                //
-                //                                alertView.setValue(activityIndicator, forKey: "accessoryView")
-                //
-                //                                activityIndicator.startAnimating()
-                //
-                //
-                //
-                //                                alertView.show()
-                //
-                //
-                //
-                //                                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-                //
-                //                                dispatch_async(dispatch_get_global_queue(priority, 0), { ()->() in
-                //
-                //                                    dispatch_async(dispatch_get_main_queue(), {
-                //
-                //                                        RepositorioManager.sharedInstance.removerTodos()
-                //
-                //                                        RepositorioManager.sharedInstance.buscarRepositorio()
-                //
-                //                                        dispatch_async(dispatch_get_main_queue(), {
-                //
-                //                             //               self.nextView.tableView.reloadData() ---- dar uma jeito para pegar a tableView
-                //
-                //                                            alertView.title = "Finalizado"
-                //
-                //                                            activityIndicator.stopAnimating()
-                //
-                //                                            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                //
-                //                                        })
-                //
-                //                                        sleep(1)
-                //
-                //                                        dispatch_async(dispatch_get_main_queue(), {
-                //
-                //                                            alertView.dismissWithClickedButtonIndex(-1, animated: true)
-                //
-                //                                        })
-                //
-                //
-                //
-                //                                    })
-                //
-                //
-                //
-                //                                })
+                var alertView: UIAlertView = UIAlertView(title: "Carregando...", message: nil, delegate: nil, cancelButtonTitle: nil)
+                
+                var activityIndicator: UIActivityIndicatorView! = UIActivityIndicatorView(frame: CGRectMake(50, 0, 35, 35)) as UIActivityIndicatorView
+                
+                activityIndicator.center = self.view.center
+                
+                activityIndicator.hidesWhenStopped = true
+                
+                activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+                
+                activityIndicator.startAnimating()
+                
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+                
+                
+                
+                alertView.setValue(activityIndicator, forKey: "carregamentoView")
+                
+                activityIndicator.startAnimating()
+                
+                
+                
+                alertView.show()
+                
+                
+                
+                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+                
+                dispatch_async(dispatch_get_global_queue(priority, 0), { ()->() in
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        
+                        RepositorioManager.sharedInstance.removerTodos()
+                        
+                        RepositorioManager.sharedInstance.buscarRepositorio()
+                        
+                        dispatch_async(dispatch_get_main_queue(), {
+                            
+                            //               self.nextView.tableView.reloadData() ---- dar uma jeito para pegar a tableView
+                            
+                            alertView.title = "Login feito!"
+                            
+                            activityIndicator.stopAnimating()
+                            
+                            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                            
+                        })
+                        
+                        sleep(1)
+                        
+                        dispatch_async(dispatch_get_main_queue(), {
+                            
+                            alertView.dismissWithClickedButtonIndex(-1, animated: true)
+                            
+                        })
+                        
+                        
+                        
+                    })
+                    
+                    
+                    
+                })
                 
                 //------------------- FIM CODIGO DA VIEW DE ESPERA
                 

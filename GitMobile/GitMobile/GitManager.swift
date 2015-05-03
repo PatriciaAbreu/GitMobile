@@ -12,7 +12,6 @@ class GitManager: NSObject {
    
     
     var session: NSMutableArray = NSMutableArray()
-    @IBOutlet weak var messageLabel: UILabel!
     
 //    autenticaçao do git
     func buscarRepos(user:String!){
@@ -64,9 +63,9 @@ class GitManager: NSObject {
         arrayDeResultados = NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers, error: nil) as! NSArray
         
         if arrayDeResultados == [] {
-            return -1
+          return -1
         }else{
-                        
+            
             //        percorre todo o array e salva no nomeRep as String que tem chave "name"
             for var i = 0; i < arrayDeResultados.count; i++ {
                 

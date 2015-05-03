@@ -19,6 +19,7 @@
 		6A4F7A491AEEA422002E5AC9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A4F7A481AEEA422002E5AC9 /* Images.xcassets */; };
 		6A4F7A4C1AEEA422002E5AC9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A4F7A4A1AEEA422002E5AC9 /* LaunchScreen.xib */; };
 		6A4F7A581AEEA422002E5AC9 /* GitMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F7A571AEEA422002E5AC9 /* GitMobileTests.swift */; };
+		B3C094841AF66AEA00A0E950 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3C094831AF66AEA00A0E950 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		6A4F7A511AEEA422002E5AC9 /* GitMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A4F7A561AEEA422002E5AC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A4F7A571AEEA422002E5AC9 /* GitMobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitMobileTests.swift; sourceTree = "<group>"; };
+		B3C094831AF66AEA00A0E950 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			children = (
 				6A4F7A3E1AEEA422002E5AC9 /* AppDelegate.swift */,
 				6A4F7A431AEEA422002E5AC9 /* ViewController.swift */,
+				B3C094831AF66AEA00A0E950 /* Settings.bundle */,
 				6A4F7A451AEEA422002E5AC9 /* Main.storyboard */,
 				4BD021701AF2A50600BBA26A /* Repositorio.swift */,
 				4BD021721AF2A52700BBA26A /* RepositorioManager.swift */,
@@ -210,6 +213,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3C094841AF66AEA00A0E950 /* Settings.bundle in Resources */,
 				6A4F7A471AEEA422002E5AC9 /* Main.storyboard in Resources */,
 				6A4F7A4C1AEEA422002E5AC9 /* LaunchScreen.xib in Resources */,
 				6A4F7A491AEEA422002E5AC9 /* Images.xcassets in Resources */,

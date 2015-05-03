@@ -18,15 +18,6 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
         return RepositorioManager.sharedInstance.buscarRepositorio()
     }()
 
-    @IBAction func btnLogout(sender: AnyObject) {
-        
-        NSUserDefaults().setObject(nil, forKey: "usuario")
-        RepositorioManager.sharedInstance.removerTodos()
-        
-        var viewLogin:UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("loginViewController") as! UIViewController
-        self.presentViewController(viewLogin, animated: true, completion: { () -> Void in})
-        
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,12 +25,103 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
         notificacao.addObserver(outraView, selector: "inserirRepositorio:", name: "novoRepositorio", object: nil)
         
         self.view.backgroundColor = UIColor(red: 110/255, green: 135/255, blue: 151/255, alpha: 1)
+        
+        self.valida()
     }
     
     override func viewWillAppear(animated: Bool) {
         self.tableView.reloadData()
-        self.navigationController?.title = NSUserDefaults().objectForKey("usuario") as? String
 
+    }
+    
+    func valida(){
+        var usuario = NSUserDefaults().objectForKey("usuario") as? String
+        if usuario ==  "" || usuario == nil{
+            let alerta: UIAlertController = UIAlertController(title: "Usuário invalido", message: "Digite seu usuário novamente", preferredStyle: .ActionSheet)
+            let acao: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: { action -> Void in
+            })
+            
+            alerta.addAction(acao)
+            
+            self.presentViewController(alerta, animated: true, completion: nil)
+        }
+        else{
+            var alertView: UIAlertView = UIAlertView(title: "Carregando...", message: nil, delegate: nil, cancelButtonTitle: nil)
+            
+            var activityIndicator: UIActivityIndicatorView! = UIActivityIndicatorView(frame: CGRectMake(50, 0, 35, 35)) as UIActivityIndicatorView
+            
+            activityIndicator.center = self.view.center
+            
+            activityIndicator.hidesWhenStopped = true
+            
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+            
+            activityIndicator.startAnimating()
+            
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            
+            
+            
+            alertView.setValue(activityIndicator, forKey: "accessoryView")
+            
+            activityIndicator.startAnimating()
+            
+            
+            
+            alertView.show()
+            
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            
+            dispatch_async(dispatch_get_global_queue(priority, 0), { ()->() in
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    
+                    if self.git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String) == -1{
+                        let alerta: UIAlertController = UIAlertController(title: "Usuário não encontrado", message: "Digite seu usuário novamente", preferredStyle: .ActionSheet)
+                        let acao: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: { action -> Void in
+                            
+                        })
+                        
+                        alerta.addAction(acao)
+                        
+                        self.presentViewController(alerta, animated: true, completion: nil)
+ 
+                    }
+                    
+                    //RepositorioManager.sharedInstance.removerTodos()
+                    RepositorioManager.sharedInstance.buscarRepositorio()
+
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.tableView.reloadData()
+
+                        alertView.title = "Login feito!"
+                        
+                        activityIndicator.stopAnimating()
+                        
+                        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                        
+                    })
+                    
+                    sleep(2)
+                    
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.tableView.reloadData()
+
+                        alertView.dismissWithClickedButtonIndex(-1, animated: true)
+                        
+                    })
+                    
+                    
+                    
+                })
+                
+                
+                
+            })
+
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,6 +140,7 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
+        println(repositorios.count)
         return repositorios.count
     }
 
