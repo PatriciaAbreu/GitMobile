@@ -88,7 +88,7 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
  
                     }
                     
-                    //RepositorioManager.sharedInstance.removerTodos()
+                    RepositorioManager.sharedInstance.removerTodos()
                     RepositorioManager.sharedInstance.buscarRepositorio()
 
                     
@@ -103,7 +103,7 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
                         
                     })
                     
-                    sleep(2)
+                    sleep(1)
                     
                     dispatch_async(dispatch_get_main_queue(), {
                         self.tableView.reloadData()
