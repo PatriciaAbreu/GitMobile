@@ -71,11 +71,10 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
             alertView.show()
             
             let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-            
             dispatch_async(dispatch_get_global_queue(priority, 0), { ()->() in
                 
                 dispatch_async(dispatch_get_main_queue(), {
-                    
+
                     if self.git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String) == -1{
                         let alerta: UIAlertController = UIAlertController(title: "Usuário não encontrado", message: "Digite seu usuário novamente", preferredStyle: .ActionSheet)
                         let acao: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: { action -> Void in
