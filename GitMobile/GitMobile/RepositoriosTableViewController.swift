@@ -13,6 +13,7 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
     var git:GitManager = GitManager()
     let notificacao:NSNotificationCenter = NSNotificationCenter.defaultCenter()
     var outraView:UIViewController!
+    var carregamentoView:UIViewController!
     
     lazy var repositorios:Array<Repositorio> = {
         return RepositorioManager.sharedInstance.buscarRepositorio()
@@ -32,6 +33,25 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
         self.tableView.reloadData()
         
     }
+    @IBAction func logout(sender: AnyObject) {
+        NSUserDefaults().setObject(nil, forKey: "usuario")
+        RepositorioManager.sharedInstance.removerTodos()
+        
+        var viewLogin:UIViewController = self.storyboard!.instantiateViewControllerWithIdentifier("loginViewController") as! UIViewController
+        self.presentViewController(viewLogin, animated: true, completion: { () -> Void in})
+
+        
+    }
+    @IBAction func refresh(sender: AnyObject) {
+        carregamentoView = self.storyboard?.instantiateViewControllerWithIdentifier("carregamento") as! UIViewController
+        self.presentViewController(carregamentoView, animated: true, completion: nil)
+        RepositorioManager.sharedInstance.removerTodos()
+        RepositorioManager.sharedInstance.buscarRepositorio()
+        let busca : Int = self.git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String)
+        
+        
+        
+    }
        override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -40,14 +60,10 @@ class RepositoriosTableViewController: UITableViewController, UITableViewDataSou
     // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
         println(repositorios.count)
         return repositorios.count
     }

@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     var git: GitManager = GitManager()
     let animation = CABasicAnimation(keyPath: "position")
     var nextView:UIViewController!
+    var carregamentoView:UIViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,77 +68,60 @@ class ViewController: UIViewController {
             userTextField.layer.addAnimation(animation, forKey: "position")
         }else{
             NSUserDefaults().setObject(userTextField.text, forKey: "usuario")
-            
-            var activityIndicator: UIActivityIndicatorView! = UIActivityIndicatorView(frame: CGRectMake(50, 0, 35, 35)) as UIActivityIndicatorView
-            var status: UILabel! = UILabel(frame: CGRectMake(50, 0, 35, 15)) as UILabel
-            
             nextView = self.storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
-            // 1. colocar uma view em cima de tudo com blur e um activityIndicator (sync)
-            // 2. consulta assincrona ao servidor para validar usuario (async)
-            //      2.1 - Se estiver ok, registrar o login localmente e mudar de tela (sync)
-            //      2.2 - Se estiver errado, avisar o usuario, remover view e activityIndicator (sync)
-            img.hidden = true
-            userTextField.hidden = true
-            btnLogin.hidden = true
-            lblWelcome.hidden = true
-            
-            activityIndicator.hidesWhenStopped = true
-            self.view.backgroundColor = UIColor.blackColor()
-            self.view.alpha = 0.1
-            activityIndicator.startAnimating()
-            status.text = "Carregando..."
-            
+            carregamentoView = self.storyboard!.instantiateViewControllerWithIdentifier("carregamento") as! UIViewController
+            self.presentViewController(self.carregamentoView, animated: true, completion: nil)
             UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            atualizar()
             
-            self.view.bringSubviewToFront(activityIndicator)
-            self.view.bringSubviewToFront(status)
+        }
+    }
+    
+    func atualizar(){
+
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0), { ()->() in
             
-            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-            dispatch_async(dispatch_get_global_queue(priority, 0), { ()->() in
-                
-                RepositorioManager.sharedInstance.removerTodos()
-                RepositorioManager.sharedInstance.buscarRepositorio()
-                
+            RepositorioManager.sharedInstance.removerTodos()
+            RepositorioManager.sharedInstance.buscarRepositorio()
+            
+            let busca : Int = self.git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String)
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 
                 // Verifica se existe usuario gravado localmente, se nao existe solicita os dados
-                if self.git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String) == -1 {
+                if busca == -1 {
                     
-                    dispatch_sync(dispatch_get_main_queue(), { () -> Void in
-                        
-                        let alerta: UIAlertController = UIAlertController(title: "Usuário não encontrado", message: "Digite seu usuário novamente", preferredStyle: .Alert)
-                        
-                        
-                        let acao: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: { action -> Void in })
-                        
-                        alerta.addAction(acao)
-                        
-                        self.presentViewController(alerta, animated: true, completion: nil)
-                        activityIndicator.hidden = true
-                        status.hidden = true
-                        self.view.backgroundColor = UIColor(red: 110/255, green: 135/255, blue: 151/255, alpha: 1)
-                        self.img.hidden = false
-                        self.userTextField.hidden = false
-                        self.btnLogin.hidden = false
-                        self.lblWelcome.hidden = false
-                        
-                    })
+                    
+                    let alerta: UIAlertController = UIAlertController(title: "Usuário não encontrado", message: "Digite seu usuário novamente", preferredStyle: .Alert)
+                    
+                    
+                    let acao: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: { action -> Void in })
+                    
+                    alerta.addAction(acao)
+                    
+                    self.presentViewController(alerta, animated: true, completion: nil)
+
+                    self.view.backgroundColor = UIColor(red: 110/255, green: 135/255, blue: 151/255, alpha: 1)
+                    self.img.hidden = false
+                    self.userTextField.hidden = false
+                    self.btnLogin.hidden = false
+                    self.lblWelcome.hidden = false
+                    
                     return;
                 }
                 else{
                     
-                    dispatch_sync(dispatch_get_main_queue(), {
-                        self.presentViewController(self.nextView, animated: true, completion: nil)
-                    })
+                    self.presentViewController(self.nextView, animated: true, completion: nil)
                 }
                 
-                dispatch_sync(dispatch_get_main_queue(), {
-                    status.text = "Fazendo login..."
-                    activityIndicator.stopAnimating()
-                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                })
+                
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                
                 
             })
-        }
+        })
+
     }
     
 //    Em qualquer lugar que tocar na tela "some" com o teclado
