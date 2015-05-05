@@ -28,6 +28,8 @@ class LabelsTableViewController: UITableViewController, UITableViewDataSource {
         
     }
     
+  
+    
     func inserirRepositorio(mensagem: NSNotification){
         let info = mensagem.userInfo as! Dictionary<String, AnyObject>
         
@@ -43,7 +45,8 @@ class LabelsTableViewController: UITableViewController, UITableViewDataSource {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {        return 1
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

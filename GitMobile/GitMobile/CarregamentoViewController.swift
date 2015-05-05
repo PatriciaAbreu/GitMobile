@@ -28,14 +28,14 @@ class CarregamentoViewController: UIViewController {
                 self.status.text = "Fazendo login..."
             })
             //Acao de login
-            sleep(4)
+            sleep(10)
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.status.text = "Usuario logado\nCarregando dados..."
             })
             
             //Acao de carregar os dados
-            sleep(3)
+            sleep(6)
             
             dispatch_async(dispatch_get_main_queue(), {
                 self.status.text = "Dados carregandos... preparando aplicação"
