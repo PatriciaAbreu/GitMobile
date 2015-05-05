@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Td5-Ce-2vC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -106,6 +106,84 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-487.5" y="351.75"/>
+        </scene>
+        <!--Carregamento View Controller-->
+        <scene sceneID="rHj-U1-YLe">
+            <objects>
+                <viewController storyboardIdentifier="carregamento" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iIx-S1-SPD" customClass="CarregamentoViewController" customModule="GitMobile" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xwV-5Y-HPz"/>
+                        <viewControllerLayoutGuide type="bottom" id="ai6-9H-wgE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="szs-He-Sqn">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pxi-kQ-JC4">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGo-2W-DSX">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="5gO-1a-knt"/>
+                                    <constraint firstAttribute="height" constant="45" id="Cib-Pn-WUK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="5gO-1a-knt"/>
+                                        <exclude reference="Cib-Pn-WUK"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="5gO-1a-knt"/>
+                                        <include reference="Cib-Pn-WUK"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.49411764705882355" green="0.56470588235294117" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="pxi-kQ-JC4" firstAttribute="top" secondItem="NGo-2W-DSX" secondAttribute="bottom" constant="24" id="0L1-xm-lkg"/>
+                            <constraint firstItem="NGo-2W-DSX" firstAttribute="centerX" secondItem="szs-He-Sqn" secondAttribute="centerX" id="hc2-l0-g62"/>
+                            <constraint firstItem="NGo-2W-DSX" firstAttribute="top" secondItem="xwV-5Y-HPz" secondAttribute="bottom" constant="292" id="oSO-Qj-zR1"/>
+                            <constraint firstItem="pxi-kQ-JC4" firstAttribute="centerX" secondItem="NGo-2W-DSX" secondAttribute="centerX" id="q6O-wg-eDv"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="pxi-kQ-JC4"/>
+                                <exclude reference="NGo-2W-DSX"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="hc2-l0-g62"/>
+                                <exclude reference="oSO-Qj-zR1"/>
+                                <exclude reference="0L1-xm-lkg"/>
+                                <exclude reference="q6O-wg-eDv"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="pxi-kQ-JC4"/>
+                                <include reference="NGo-2W-DSX"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="hc2-l0-g62"/>
+                                <include reference="oSO-Qj-zR1"/>
+                                <include reference="0L1-xm-lkg"/>
+                                <include reference="q6O-wg-eDv"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="pxi-kQ-JC4" id="Prl-yj-jJT"/>
+                        <outlet property="status" destination="NGo-2W-DSX" id="PVA-GG-HXU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7D0-9J-zFw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-487.5" y="1075.5"/>
         </scene>
         <!--Repositorios-->
         <scene sceneID="dSe-8k-iSY">

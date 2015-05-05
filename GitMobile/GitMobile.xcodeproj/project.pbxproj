@@ -19,6 +19,7 @@
 		6A4F7A491AEEA422002E5AC9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A4F7A481AEEA422002E5AC9 /* Images.xcassets */; };
 		6A4F7A4C1AEEA422002E5AC9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A4F7A4A1AEEA422002E5AC9 /* LaunchScreen.xib */; };
 		6A4F7A581AEEA422002E5AC9 /* GitMobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A4F7A571AEEA422002E5AC9 /* GitMobileTests.swift */; };
+		B33E90E21AF827A800F8C546 /* CarregamentoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33E90E11AF827A800F8C546 /* CarregamentoViewController.swift */; };
 		B3C094841AF66AEA00A0E950 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B3C094831AF66AEA00A0E950 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		6A4F7A511AEEA422002E5AC9 /* GitMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A4F7A561AEEA422002E5AC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6A4F7A571AEEA422002E5AC9 /* GitMobileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitMobileTests.swift; sourceTree = "<group>"; };
+		B33E90E11AF827A800F8C546 /* CarregamentoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarregamentoViewController.swift; sourceTree = "<group>"; };
 		B3C094831AF66AEA00A0E950 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,13 +95,14 @@
 			children = (
 				6A4F7A3E1AEEA422002E5AC9 /* AppDelegate.swift */,
 				6A4F7A431AEEA422002E5AC9 /* ViewController.swift */,
-				B3C094831AF66AEA00A0E950 /* Settings.bundle */,
+				B33E90E11AF827A800F8C546 /* CarregamentoViewController.swift */,
+				4BD9F7821AF002F300FF5AF6 /* RepositoriosTableViewController.swift */,
+				4BD9F7841AF0032000FF5AF6 /* LabelsTableViewController.swift */,
 				6A4F7A451AEEA422002E5AC9 /* Main.storyboard */,
 				4BD021701AF2A50600BBA26A /* Repositorio.swift */,
 				4BD021721AF2A52700BBA26A /* RepositorioManager.swift */,
 				4BD0216E1AF2A03400BBA26A /* GitManager.swift */,
-				4BD9F7841AF0032000FF5AF6 /* LabelsTableViewController.swift */,
-				4BD9F7821AF002F300FF5AF6 /* RepositoriosTableViewController.swift */,
+				B3C094831AF66AEA00A0E950 /* Settings.bundle */,
 				6A4F7A481AEEA422002E5AC9 /* Images.xcassets */,
 				6A4F7A4A1AEEA422002E5AC9 /* LaunchScreen.xib */,
 				6A4F7A401AEEA422002E5AC9 /* GitMobile.xcdatamodeld */,
@@ -236,6 +239,7 @@
 			files = (
 				4BD9F7851AF0032000FF5AF6 /* LabelsTableViewController.swift in Sources */,
 				4BD021711AF2A50600BBA26A /* Repositorio.swift in Sources */,
+				B33E90E21AF827A800F8C546 /* CarregamentoViewController.swift in Sources */,
 				6A4F7A441AEEA422002E5AC9 /* ViewController.swift in Sources */,
 				4BD9F7831AF002F300FF5AF6 /* RepositoriosTableViewController.swift in Sources */,
 				6A4F7A421AEEA422002E5AC9 /* GitMobile.xcdatamodeld in Sources */,

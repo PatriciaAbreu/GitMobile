@@ -9,21 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    //    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    //    @IBOutlet weak var labelMessage: UILabel!
-    
+
     @IBOutlet weak var btnLogin: UIButton!
-    
-    var git: GitManager = GitManager()
-    let animation = CABasicAnimation(keyPath: "position")
-    var nextView:UIViewController!
-    
     @IBOutlet weak var lblWelcome: UILabel!
     @IBOutlet weak var userTextField: UITextField!
     @IBOutlet weak var img: UIImageView!
     
+    var git: GitManager = GitManager()
+    let animation = CABasicAnimation(keyPath: "position")
+    var nextView:UIViewController!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,59 +26,38 @@ class ViewController: UIViewController {
         userTextField.placeholder = "                    Insert your GitUser here..."
         lblWelcome.text = "Welcome to GitMobile!"
         
-//        UIView.animateWithDuration(1.0, delay: 0.2, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: nil, animations: {
-//            
-//            self.EducationLabel.hidden = true
-//            self.EducationLabel.center = CGPointMake(8, 150)
-//            self.EducationLabel.hidden = false
-//            
-//            }, completion: nil)
+        nextView = self.storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
+        var usuario = NSUserDefaults().objectForKey("usuario") as? String
+        if usuario !=  nil && usuario != ""{
+            // preenche textField com o nome do usuario
+            // chama metodo do botao de logar
+            self.presentViewController(nextView, animated: true, completion: nil)
+            return;
+        }
+        
         
         UIImageView.animateWithDuration(2.0, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: nil, animations: {
-            
-            //self.lblWelcome.hidden = true
-            //self.userTextField.hidden = true
-            //self.btnLogin.hidden = true
             self.img.center = CGPointMake(0, 0)
         }, completion: nil)
         
         
         UILabel.animateWithDuration(2.0, delay: 0.1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: nil, animations: {
-            
-            //self.userTextField.hidden = true
-            //self.btnLogin.hidden = true
             self.lblWelcome.center = CGPointMake(0, 50)
         }, completion: nil)
         
         UITextField.animateWithDuration(2.0, delay: 1.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: nil, animations: {
-            
-            //self.btnLogin.hidden = true
             self.userTextField.center = CGPointMake(0, 50)
         }, completion: nil)
         
         
         UIButton.animateWithDuration(2.0, delay: 1.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: nil, animations: {
-            
             self.btnLogin.center = CGPointMake(0, 50)
         }, completion: nil)
         
-        
-//                activityIndicator.hidden = true
-        
-        //        labelMessage.hidden = true
+
     }
     
     @IBAction func entradaUsuario(sender: AnyObject) {
-        
-        //        activityIndicator.hidden = false
-        //        labelMessage.hidden = false
-        userTextField.hidden = true
-        btnLogin.hidden = true
-        lblWelcome.hidden = true
-        //        activityIndicator.startAnimating()
-        //        activityIndicator.hidesWhenStopped = true
-        //        labelMessage.text = "Fazendo login..."
-        
         if userTextField.text == "" {
             animation.duration = 0.07
             animation.repeatCount = 4
@@ -92,172 +66,78 @@ class ViewController: UIViewController {
             animation.toValue = NSValue(CGPoint: CGPointMake(userTextField.center.x + 10, userTextField.center.y))
             userTextField.layer.addAnimation(animation, forKey: "position")
         }else{
+            NSUserDefaults().setObject(userTextField.text, forKey: "usuario")
+            
+            var activityIndicator: UIActivityIndicatorView! = UIActivityIndicatorView(frame: CGRectMake(50, 0, 35, 35)) as UIActivityIndicatorView
+            var status: UILabel! = UILabel(frame: CGRectMake(50, 0, 35, 15)) as UILabel
             
             nextView = self.storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
+            // 1. colocar uma view em cima de tudo com blur e um activityIndicator (sync)
+            // 2. consulta assincrona ao servidor para validar usuario (async)
+            //      2.1 - Se estiver ok, registrar o login localmente e mudar de tela (sync)
+            //      2.2 - Se estiver errado, avisar o usuario, remover view e activityIndicator (sync)
+            img.hidden = true
+            userTextField.hidden = true
+            btnLogin.hidden = true
+            lblWelcome.hidden = true
             
+            activityIndicator.hidesWhenStopped = true
+            self.view.backgroundColor = UIColor.blackColor()
+            self.view.alpha = 0.1
+            activityIndicator.startAnimating()
+            status.text = "Carregando..."
             
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             
-            var valida = git.buscarRepositorio(userTextField.text)
-            if valida == -1{
-                let alerta: UIAlertController = UIAlertController(title: "Usuário não encontrado", message: "Digite seu usuário novamente", preferredStyle: .ActionSheet)
-                let acao: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: { action -> Void in
+            self.view.bringSubviewToFront(activityIndicator)
+            self.view.bringSubviewToFront(status)
+            
+            let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+            dispatch_async(dispatch_get_global_queue(priority, 0), { ()->() in
+                
+                RepositorioManager.sharedInstance.removerTodos()
+                RepositorioManager.sharedInstance.buscarRepositorio()
+                
+                
+                // Verifica se existe usuario gravado localmente, se nao existe solicita os dados
+                if self.git.buscarRepositorio(NSUserDefaults().objectForKey("usuario") as! String) == -1 {
                     
-                    self.userTextField.hidden = false
-                    self.btnLogin.hidden = false
-                    
-                })
-                
-                alerta.addAction(acao)
-                
-                self.presentViewController(alerta, animated: true, completion: nil)
-                
-            }else{
-                
-                nextView = self.storyboard!.instantiateViewControllerWithIdentifier("MainNavigationController") as! UIViewController
-                //
-                //------------------ INICIO DA VIEW DE ESPERA
-                
-                //                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-                
-                //                dispatch_async(dispatch_get_global_queue(priority, 0), { ()->() in
-                //
-                //                    dispatch_async(dispatch_get_main_queue(), {
-                //
-                //                        //                        self.activityIndicator.hidden = false
-                //
-                //                        //                        self.labelMessage.hidden = false
-                //
-                //                        //                        self.userTextField.hidden = true
-                //
-                //                        //                        self.btnLogin.hidden = true
-                //
-                //                        //                        self.activityIndicator.startAnimating()
-                //
-                //                        //                        self.activityIndicator.hidesWhenStopped = true
-                //
-                //                        //                        self.labelMessage.text = "Fazendo login..."
-                //
-                //                    })
-                
-                //Acao de login
-                //
-                //                    sleep(1)
-                //
-                //                    dispatch_async(dispatch_get_main_queue(), {
-                //
-                //                        NSUserDefaults().setObject(self.userTextField.text, forKey: "usuario")
-                //
-                //                        self.labelMessage.text = "Usuario logado\nCarregando dados..."
-                //
-                //                    })
-                //
-                //                    //Acao de carregar os dados
-                //
-                //                    sleep(2)
-                //
-                //                    dispatch_async(dispatch_get_main_queue(), {
-                
-                //                        self.labelMessage.text = "Dados carregandos... preparando aplicação"
-                
-                //                    })
-                
-                //prepara os dados para a proxima tela
-                
-                // chama a proxima tela
-                //
-                //                    println("FIM da Thread")
-                //
-                //                    dispatch_async(dispatch_get_main_queue(), {
-                //
-                //                        self.presentViewController(self.nextView, animated: true, completion: { () -> Void in})
-                //
-                //                        self.activityIndicator.stopAnimating()
-                //
-                //                    })
-                //
-                ////                })
-                //
-                //                println("Fim do ViewDidLoad")
-                //
-                //
-                var alertView: UIAlertView = UIAlertView(title: "Carregando...", message: nil, delegate: nil, cancelButtonTitle: nil)
-                
-                var activityIndicator: UIActivityIndicatorView! = UIActivityIndicatorView(frame: CGRectMake(50, 0, 35, 35)) as UIActivityIndicatorView
-                
-                activityIndicator.center = self.view.center
-                
-                activityIndicator.hidesWhenStopped = true
-                
-                activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
-                
-                activityIndicator.startAnimating()
-                
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-                
-                
-                
-                alertView.setValue(activityIndicator, forKey: "carregamentoView")
-                
-                activityIndicator.startAnimating()
-                
-                
-                
-                alertView.show()
-                
-                
-                
-                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-                
-                dispatch_async(dispatch_get_global_queue(priority, 0), { ()->() in
-                    
-                    dispatch_async(dispatch_get_main_queue(), {
+                    dispatch_sync(dispatch_get_main_queue(), { () -> Void in
                         
-                        RepositorioManager.sharedInstance.removerTodos()
-                        
-                        RepositorioManager.sharedInstance.buscarRepositorio()
-                        
-                        dispatch_async(dispatch_get_main_queue(), {
-                            
-                            //               self.nextView.tableView.reloadData() ---- dar uma jeito para pegar a tableView
-                            
-                            alertView.title = "Login feito!"
-                            
-                            activityIndicator.stopAnimating()
-                            
-                            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-                            
-                        })
-                        
-                        sleep(1)
-                        
-                        dispatch_async(dispatch_get_main_queue(), {
-                            
-                            alertView.dismissWithClickedButtonIndex(-1, animated: true)
-                            
-                        })
+                        let alerta: UIAlertController = UIAlertController(title: "Usuário não encontrado", message: "Digite seu usuário novamente", preferredStyle: .Alert)
                         
                         
+                        let acao: UIAlertAction = UIAlertAction(title: "OK", style: .Default, handler: { action -> Void in })
+                        
+                        alerta.addAction(acao)
+                        
+                        self.presentViewController(alerta, animated: true, completion: nil)
+                        activityIndicator.hidden = true
+                        status.hidden = true
+                        self.view.backgroundColor = UIColor(red: 110/255, green: 135/255, blue: 151/255, alpha: 1)
+                        self.img.hidden = false
+                        self.userTextField.hidden = false
+                        self.btnLogin.hidden = false
+                        self.lblWelcome.hidden = false
                         
                     })
+                    return;
+                }
+                else{
                     
-                    
-                    
+                    dispatch_sync(dispatch_get_main_queue(), {
+                        self.presentViewController(self.nextView, animated: true, completion: nil)
+                    })
+                }
+                
+                dispatch_sync(dispatch_get_main_queue(), {
+                    status.text = "Fazendo login..."
+                    activityIndicator.stopAnimating()
+                    UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 })
                 
-                //------------------- FIM CODIGO DA VIEW DE ESPERA
-                
-                
-                
-                NSUserDefaults().setObject(userTextField.text, forKey: "usuario")
-                
-                self.presentViewController(nextView, animated: true, completion: { () -> Void in})
-                
-                
-                
-            }
-            
+            })
         }
-        
     }
     
 //    Em qualquer lugar que tocar na tela "some" com o teclado
